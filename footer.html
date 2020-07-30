@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <footer>   <hr>
+
+      <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+      </script>
+
+
+
+      <div class="media">
+  <img class="mr-3" src="img/stats-115-logo.svg"
+  alt="Stats 115 Course logo" style="width:100px; margin-right:20%; margin-left:10%;">
+  <div class="media-body">
+    <h5 class="mt-0">Introduction to Bayesian Data Analysis </h5>
+    University of California Irvine <br>
+    Summer II 2020 <br>
+    &copy; <a href="https://minedogucu.com">Mine Dogucu</a> <br>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  </div>
+</div>
+
+
+
+</footer>
+
+  </body>
+</html>

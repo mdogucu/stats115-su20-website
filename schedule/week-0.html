@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stats 115</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <script src="https://kit.fontawesome.com/4145f6a1ca.js"></script>
+
+
+
+
+    <!-- function for adding html within html-->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script>
+        $(function () {
+            $(".load-html").each(function () {
+                $(this).load(this.dataset.source);
+            });
+        });
+        </script>
+
+  </head>
+  <body>
+
+
+    <div class="load-html"  data-source="navbar.html"></div>
+
+
+    <div class = "main-text">
+
+      <h1>Week 1 - Introduction to Stats 67 and Data</h1>
+
+
+      Welcome to the course! Before we start learning statistics
+      we will get to know each other, the tools we will use,
+      and the policies of the course.
+
+      If you have any questions about Week 1 materials please post
+      it on the <a href="https://canvas.eee.uci.edu/courses/28921/discussion_topics/377961">discussion board</a> on Canvas.
+
+      If you click on icons such as <i class="fas fa-video" aria-hidden="true"
+      title="Link to lecture video"></i> it would direct you to the appropriate link
+      where the course material lies.
+
+
+
+      <br>
+      <br>
+
+      <table class="table-striped text-left table-bordered" align = "center">
+
+        <thead>
+
+          <th style="width:  3%"></th>
+          <th style="width:  30%"></th>
+          <th style="width:  40%">Notes</th>
+          <th style="width:  5%">Links</th>
+
+          <th style="width:  15%">Due</th>
+        </thead>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Welcome to the Course</td>
+          <td> </td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Getting to Know Your Professor</td>
+          <td> </td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Getting to Know Your TA</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Getting to Know Your Reader</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Introduce Yourself to the Class</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Introduce Yourself to the Teaching Team</td>
+          <td>The responses to this "quiz" will not be available to your classmates.
+            It is untimed.</td>
+
+          <td> <a href=""> <i class="fas fa-edit" aria-hidden="true"
+            title="External Link to Gradescope" target = "_blank"></i></a></td>
+          <td>Aug 7, 5 pm</td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td> Getting to Know the Course Website &nbsp; &nbsp; </td>
+          <td></td>
+          <td> <a href="" target = "_blank"> <i class="fas fa-video" aria-hidden="true" title="Link to lecture video"></i></a></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Syllabus Quiz</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Download and install R</td>
+          <td></td>
+          <td> <a href="https://mirror.las.iastate.edu/CRAN/" target = "_blank"> <i class="fas fa-link" aria-hidden="true"
+            title="External link"></i></a></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Download RStudio</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Getting started with R </td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+
+          <td> Download VPN  &nbsp; &nbsp;  </td>
+          <td>Use the instructions to download VPN so that you can access resources
+            that are only available on the campus network.</td>
+          <td> <a href="https://www.oit.uci.edu/help/vpn/" target = "_blank"> <i class="fas fa-link" aria-hidden="true"
+            title="External link"></i></a></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+
+          <td>Toolbox Quiz</td>
+          <td></td>
+          <td> <a href=""> <i class="fas fa-edit" aria-hidden="true"
+            title="External link"></i></a></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Introduction to Data</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Variable Types</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td> Descriptive Statistics</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td> Descriptive Statistics in R</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td> Visual Summaries</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td> Visual Summaries in R</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td> Relationship Between Two Variables</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Sampling</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Study Design</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>Simpson's Paradox</td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+
+        <tr>
+          <td><input type="checkbox" /></td>
+
+          <td> Optional Reading &nbsp; &nbsp; </td>
+          <td>from OpenIntro pages XX-XX</td>
+          <td> <a href=""> <i class="fas fa-edit" aria-hidden="true"
+            title="Link to Gradescope assignment" target = "_blank"></i></a></td>
+          <td>Aug 7, 5 pm</td>
+        </tr>
+
+
+      </table>
+
+<!--
+Blank table overflow
+<tr>
+  <td><input type="checkbox" /></td>
+  <td> </td>
+  <td> </td>
+  <td></td>
+</tr>
+-->
+
+
+
+    </div>
+
+
+    <div class="load-html"  data-source="footer.html"></div>
+
+
+  </body>
+</html>

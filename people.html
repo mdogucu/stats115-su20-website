@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stats 115</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/4145f6a1ca.js"></script>
+
+
+
+
+    <!-- function for adding html within html-->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script>
+        $(function () {
+            $(".load-html").each(function () {
+                $(this).load(this.dataset.source);
+            });
+        });
+        </script>
+
+  </head>
+  <body>
+
+
+    <div class="load-html"  data-source="navbar.html"></div>
+
+
+    <div class="main-text">
+
+
+    <div class="container-fluid">
+
+    <div class="row">
+    <div class="col-sm-6"><span style="font-size:30px; font-weight: bold;">Instructor</span> <br>
+    <span style="font-size:28px;">Mine Dogucu </span> <br>
+    she/her/hers <br>
+    <a href="mailto:mdogucu@uci.edu" target="_top">mdogucu@uci.edu</a> <br>
+    <hr>
+
+    <img src="img/headshot.jpg" class="rounded-circle center mx-auto d-block"
+          alt="Headshot of Professor Dogucu. A woman with curly, short, ear-length hair with green eyes and red lipstick."
+          style="width:200px; margin-right;40%; margin-left:10%; display:block;">
+    <br>
+    <audio controls style = "width:100%;">
+    <source src="audio/mine-dogucu.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio> <br>
+
+    <hr>
+
+    <span style="font-size:20px;">Office Hours </span> <br>
+
+    Tu: 4 - 5 pm <a href="https://uci.zoom.us/j/99617039984"><i class="fas fa-link" aria-hidden="true" title="Link to Office Hours"></i></a> <br>
+    W: 8 - 9 am <a href="https://uci.zoom.us/j/99617039984"><i class="fas fa-link" aria-hidden="true" title="Link to Office Hours"></i></a> <br>
+    Th: 4 - 5 pm <a href="https://uci.zoom.us/j/99617039984"><i class="fas fa-link" aria-hidden="true" title="Link to Office Hours"></i></a>
+    <hr>
+    </div> <!--end of instructor Mine-->
+
+
+
+    <div class="col-sm-6"><span style="font-size:30px; font-weight: bold;">Reader</span> <br>
+    <span style="font-size:28px;">Josie Jiang </span> <br>
+    she/her/hers <br>
+    <a href="mailto:xiwenj@uci.edu" target="_top">xiwenj@uci.edu</a> <br>
+    <hr>
+
+    <img src="img/josie-jiang.jpeg" class="rounded-circle center mx-auto d-block"
+        alt="Headshot of Catalina Medina. A woman with blonde straight hair wearing a small necklace."
+        style="width:200px; margin-right;40%; margin-left:10%; display:block;">
+    <br>
+    <audio controls style = "width:100%;">
+    <source src="audio/josie-jiang.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio> <br>
+
+    <hr>
+
+
+    </div> <!--end of instructor Catalina-->
+
+
+
+
+
+    </div> <!-- end of row-->
+
+    </div> <!--end of container-fluid-->
+    </div> <!--end of main text-->
+
+
+    <div class="load-html"  data-source="footer.html"></div>
+
+
+  </body>
+</html>
