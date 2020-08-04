@@ -1,0 +1,132 @@
+.title-slide {
+  background-color: #ae8f68; 
+  color: whitesmoke;
+
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+a{
+  color:#e56646;
+}
+
+
+p {
+font-size: 30px;
+}
+
+ul {
+  font-size: 30px;
+
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+
+td{
+  font-size:24px;
+  padding:5px;
+  text-align:center;
+  
+}
+
+th, td{padding: 5px;
+  font-size:24px;
+}
+
+thead, tfoot, tr:nth-child(even) { background: #eee }
+
+
+div.my-header {
+    background-color: #ae8f68;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    width: 100%;
+    text-align: left;
+}
+
+div.my-footer {
+    background-color: #ae8f68;
+    position: fixed;
+    bottom: 5px;
+    left: 0px;
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+div.my-footer a{
+  color:#5c5c5c;
+}
+
+  
+  
+.question{
+  background-color:#cfafaf;
+  font-size: 43px;
+  color:#000000;
+  text-align:center;
+
+}
+
+.formula{
+  background-color:#f1cb85;
+  align: center;
+}
+
+.pull-left {
+  float: left;
+  width: 50%;
+}
+.pull-right {
+  float: right;
+  width: 50%;
+}
+
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.remark-code, .remark-inline-code { 
+  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
+  font-size: 30px;
+}
+
+.left-panel {
+  width: 43%;
+  float: left;
+}
+.right-panel {
+  width: 55%;
+  float: right;
+  padding-left: 1%;
+}
+
+.footnote{
+    position: fixed;
+    bottom: 33px;
+    font-size:22px;
+
+}
+
+
+
+*{
+ font-size: 100%;
+ font-family: Helvetica;
+ color: #5c5c5c;
+}
+

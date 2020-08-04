@@ -1,0 +1,93 @@
+---
+title: "Introduction to Bayesian Analysis"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+# Key Point in Bayesian Statistics
+
+It is OK 
+
+- to have prior ideas (e.g. expert knowledge)
+- use these ideas 
+- weight them against the observed data.
+
+---
+
+# Bayesian vs. Frequentist
+
+Consider two claims. (1) Zuofu claims that he can predict the outcome of a coin flip.  To test his claim, you flip a fair coin 10 times and he correctly predicts all 10! 
+
+(2) Kavya claims that she can distinguish Dunkin' coffee from Starbucks coffee.  To test her claim, you give her 10 coffee samples and she correctly identifies the origin of each!  In light of these experiments, what do you conclude?    
+
+a. You're more confident in Kavya's claim than Zuofu's claim.  
+b. The evidence supporting Zuofu's claim is just as strong as the evidence supporting Kavya's claim.
+
+---
+
+# Bayesian vs. Frequentist
+
+Your doctor called you to tell you that you have been tested positive for a rare disease. The doctor gives you the opportunity to ask one question. Which of the following would you ask?
+
+a. What is the probability that I actually have the disease given that I have tested positive?  
+b. If I do not have the disease, what is the probability that I would have gotten this positive test result?
+
+---
+
+
+# Notes on Bayesian History
+
+- Frequentist statistics is more popular and Bayesian statistics is starting to get popular. 
+
+- Named after Thomas Bayes (1701-1761).
+
+- Computing, computing, computing.
+
+- It is harder to adopt to newer methods. Thus change is happening slowly. 
+
+- We can embrace subjectivity. 
+
+---
+
+
+# Bayesian vs. Frequentist
+
+.pull-left[
+__Frequentist__
+
+Probability is based on long-term frequencies. 
+
+When answering a question, we assume that the null hypothesis is true and then calculate the probability of observing the data if the null were true. 
+]
+
+.pull-right[
+__Bayesian__
+
+Probability is a balance of relative plausibility of an event and degree of prior ideas.  
+
+When an answering a question we calculate the probability that the null hypothesis is true based on the given data. 
+]
+
+---
+
+# Optional
+
+Watch [How Data Nerds Found A 131-Year-Old Sunken Treasure](https://fivethirtyeight.com/features/how-data-nerds-found-a-131-year-old-sunken-treasure/)
+
+Spoiler alert: They used Bayesian Statistics!
+
