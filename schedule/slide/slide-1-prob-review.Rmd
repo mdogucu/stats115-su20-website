@@ -1,0 +1,99 @@
+---
+title: "Probability Review"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+# Probability Review
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-x5q1{font-size:16px;text-align:left;vertical-align:top}
+.tg .tg-vox4{font-weight:bold;font-size:16px;text-align:left;vertical-align:top}
+.tg .tg-cqfb{font-size:16px;text-align:left;vertical-align:middle}
+</style>
+<table class="tg" align="center">
+  <tr>
+    <th class="tg-x5q1"></th>
+    <th class="tg-x5q1" colspan="2">Belief in afterlife</th>
+    <th class="tg-x5q1"></th>
+  </tr>
+  <tr>
+    <td class="tg-cqfb">Taken a college science class</td>
+    <td class="tg-cqfb">Yes</td>
+    <td class="tg-cqfb">No</td>
+    <td class="tg-vox4">Total</td>
+  </tr>
+  <tr>
+    <td class="tg-cqfb">Yes</td>
+    <td class="tg-cqfb">2702</td>
+    <td class="tg-cqfb">634</td>
+    <td class="tg-vox4"><span style="font-weight:700">3336</span></td>
+  </tr>
+  <tr>
+    <td class="tg-cqfb">No</td>
+    <td class="tg-cqfb">3722</td>
+    <td class="tg-cqfb">837</td>
+    <td class="tg-vox4"><span style="font-weight:700">4559</span></td>
+  </tr>
+  <tr>
+    <td class="tg-vox4">Total</td>
+    <td class="tg-vox4">6424</td>
+    <td class="tg-vox4"><span style="font-weight:bold">1471</span></td>
+    <td class="tg-vox4">7895</td>
+  </tr>
+</table>
+
+
+<p style="font-size: small">
+Data from <a href ="https://gssdataexplorer.norc.org"> General Social Survey</a>
+</p>
+
+$P(\text{belief in afterlife})$ = ?
+$P(\text{belief in afterlife and taken a college science class})$ = ?  
+$P(\text{belief in afterlife given taken a college science class})$ = ?
+
+Calculate these probabilities and write them using correct notation. Use $A$ for belief in afterlife and $B$ for college science class.
+---
+---
+## Vocabulary Review
+
+$P(A^C)$ is called __complement__ of event A and represents the probability of selecting someone that does not believe in afterlife.  
+
+---
+## Vocabulary Review
+
+$P(A)$ represents a __marginal probability__. So do $P(B)$, $P(A^C)$ and $P(B^C)$. In order to calculate these probabilities we could only use the values in the margins of the contingency table, hence the name. 
+
+---
+## Vocabulary Review
+$P(A \cap S)$ represents a __joint probability__. So do $P(A^c \cap B)$, $P(A\cap B^c)$ and $P(B^c\cap B^c)$. 
+
+Note that $P(A\cap B) = P(B\cap A)$. Order does _not_ matter.
+
+---
+## Vocabulary Review
+$P(A|B)$ represents a __conditional probability__. So do $P(A^c|B)$, $P(A | B^c)$ and $P(A^c|B^c)$. In order to calculate these probabilities we would focus on the row or the column of the given information. In a way we are _reducing_ our sample space to this given information only. 
+
+---
+## Note on conditional probability
+
+$P(\text{attending every class | getting an A}) \neq$ $P(\text{getting an A | attending every class})$
+
+The order matters!

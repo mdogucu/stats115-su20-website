@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Probability Review</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Dogucu" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Probability Review
+### Dr. Dogucu
+
+---
+
+
+layout: true
+  
+&lt;div class="my-header"&gt;&lt;/div&gt;
+
+&lt;div class="my-footer"&gt; From Bayes Rules! book
+ Copyright &amp;copy; Drs. Alicia Johnson, Miles Ott &amp; Mine Dogucu. &lt;a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;CC BY-NC-SA 4.0&lt;/a&gt;&lt;/div&gt; 
+
+---
+# Probability Review
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-x5q1{font-size:16px;text-align:left;vertical-align:top}
+.tg .tg-vox4{font-weight:bold;font-size:16px;text-align:left;vertical-align:top}
+.tg .tg-cqfb{font-size:16px;text-align:left;vertical-align:middle}
+&lt;/style&gt;
+&lt;table class="tg" align="center"&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-x5q1"&gt;&lt;/th&gt;
+    &lt;th class="tg-x5q1" colspan="2"&gt;Belief in afterlife&lt;/th&gt;
+    &lt;th class="tg-x5q1"&gt;&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-cqfb"&gt;Taken a college science class&lt;/td&gt;
+    &lt;td class="tg-cqfb"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-cqfb"&gt;No&lt;/td&gt;
+    &lt;td class="tg-vox4"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-cqfb"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-cqfb"&gt;2702&lt;/td&gt;
+    &lt;td class="tg-cqfb"&gt;634&lt;/td&gt;
+    &lt;td class="tg-vox4"&gt;&lt;span style="font-weight:700"&gt;3336&lt;/span&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-cqfb"&gt;No&lt;/td&gt;
+    &lt;td class="tg-cqfb"&gt;3722&lt;/td&gt;
+    &lt;td class="tg-cqfb"&gt;837&lt;/td&gt;
+    &lt;td class="tg-vox4"&gt;&lt;span style="font-weight:700"&gt;4559&lt;/span&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-vox4"&gt;Total&lt;/td&gt;
+    &lt;td class="tg-vox4"&gt;6424&lt;/td&gt;
+    &lt;td class="tg-vox4"&gt;&lt;span style="font-weight:bold"&gt;1471&lt;/span&gt;&lt;/td&gt;
+    &lt;td class="tg-vox4"&gt;7895&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+
+&lt;p style="font-size: small"&gt;
+Data from &lt;a href ="https://gssdataexplorer.norc.org"&gt; General Social Survey&lt;/a&gt;
+&lt;/p&gt;
+
+`\(P(\text{belief in afterlife})\)` = ?
+`\(P(\text{belief in afterlife and taken a college science class})\)` = ?  
+`\(P(\text{belief in afterlife given taken a college science class})\)` = ?
+
+Calculate these probabilities and write them using correct notation. Use `\(A\)` for belief in afterlife and `\(B\)` for college science class.
+---
+---
+## Vocabulary Review
+
+`\(P(A^C)\)` is called __complement__ of event A and represents the probability of selecting someone that does not believe in afterlife.  
+
+---
+## Vocabulary Review
+
+`\(P(A)\)` represents a __marginal probability__. So do `\(P(B)\)`, `\(P(A^C)\)` and `\(P(B^C)\)`. In order to calculate these probabilities we could only use the values in the margins of the contingency table, hence the name. 
+
+---
+## Vocabulary Review
+`\(P(A \cap S)\)` represents a __joint probability__. So do `\(P(A^c \cap B)\)`, `\(P(A\cap B^c)\)` and `\(P(B^c\cap B^c)\)`. 
+
+Note that `\(P(A\cap B) = P(B\cap A)\)`. Order does _not_ matter.
+
+---
+## Vocabulary Review
+`\(P(A|B)\)` represents a __conditional probability__. So do `\(P(A^c|B)\)`, `\(P(A | B^c)\)` and `\(P(A^c|B^c)\)`. In order to calculate these probabilities we would focus on the row or the column of the given information. In a way we are _reducing_ our sample space to this given information only. 
+
+---
+## Note on conditional probability
+
+`\(P(\text{attending every class | getting an A}) \neq\)` `\(P(\text{getting an A | attending every class})\)`
+
+The order matters!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

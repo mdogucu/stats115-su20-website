@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bayesian Models for Random Variables</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Dogucu" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bayesian Models for Random Variables
+### Dr. Dogucu
+
+---
+
+
+layout: true
+  
+&lt;div class="my-header"&gt;&lt;/div&gt;
+
+&lt;div class="my-footer"&gt; From Bayes Rules! book
+ Copyright &amp;copy; Drs. Alicia Johnson, Miles Ott &amp; Mine Dogucu. &lt;a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;CC BY-NC-SA 4.0&lt;/a&gt;&lt;/div&gt; 
+
+---
+
+
+
+
+# Review: Discrete probability models
+
+Let `\(X\)` be a discrete random variable with probability mass function (pmf) `\(f(x)\)`.  Then the pmf defines the probability of any given `\(x\)`, `\(f(x) = P(X = x)\)`, and has the following properties:    
+
+`\(\sum_{\text{all } x} f(x) = 1\)`  
+
+`\(0 \le f(x) \le 1\)` for all values of `\(x\)` in the range of `\(X\)`
+---
+## Notation
+
+- We will use _Greek letters_ (eg: `\(\pi, \beta, \mu\)`) to denote our primary variables of interest.
+
+- We will use _capital letters_ toward the end of the alphabet (eg: `\(X, Y, Z\)`) to denote random variables related to our data.  
+
+- We denote an observed _outcome_ of `\(X\)` (a constant) using lower case `\(x\)`.  
+
+---
+## PhD admissions
+
+Let X represent a random variable that represents the number of applicants admitted to a PhD program which has received applications from 5 prospective students. That is `\(\Omega_X = \{0, 1, 2, 3, 4, 5\}\)`. We are interested in the parameter `\(\pi\)` which represents the probability of acceptance to this program. We know that `\(\pi\)` can be any value between 0 and 1 but for now we will only consider three possible values of `\(\pi\)` as 0.1, 0.5, and 0.9. 
+
+---
+# Prior model for `\(\pi\)`
+
+You are now a true Bayesian and decide to consult with an expert who knows the specific PhD program well and the following is the prior distribution the expert suggests you use in your analysis. 
+
+&lt;table align = "center"&gt;
+&lt;tr&gt;
+  &lt;th&gt; &amp;Pi;&lt;/th&gt;
+  &lt;th&gt; 0.1&lt;/th&gt;
+  &lt;th&gt; 0.5&lt;/th&gt;
+  &lt;th&gt; 0.9&lt;/th&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt; f(&amp;Pi;)&lt;/th&gt;
+  &lt;th&gt; 0.7&lt;/th&gt;
+  &lt;th&gt; 0.2&lt;/th&gt;
+  &lt;th&gt; 0.1&lt;/th&gt;
+
+&lt;/tr&gt;
+&lt;/table&gt;
+
+The expert thinks that this is quite a hard-to-get-into program.
+
+---
+# From prior to posterior
+
+We have a prior model for `\(\pi\)` that is `\(f(\pi)\)`. 
+
+In light of observed data `\(x\)` we can update our ideas about `\(\pi\)`. 
+
+We will call this the posterior model `\(f(\pi|x)\)`.  
+
+In order to do this update we will need data which we have not observed yet. 
+
+---
+## Consider data
+
+For the two scenarios below fill out the table (twice). For now, it is OK to use your intuition to guesstimate. 
+
+&lt;table align = "center"&gt;
+&lt;tr&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt; &amp;Pi;&lt;/th&gt;
+  &lt;th&gt; 0.1&lt;/th&gt;
+  &lt;th&gt; 0.5&lt;/th&gt;
+  &lt;th&gt; 0.9&lt;/th&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt; f(&amp;Pi;)&lt;/td&gt;
+  &lt;td&gt; 0.7&lt;/td&gt;
+  &lt;td&gt; 0.2&lt;/td&gt;
+  &lt;td&gt; 0.1&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt;Scenario 1&lt;/td&gt;
+  &lt;td&gt; f(&amp;Pi;|x)&lt;/td&gt;
+  &lt;td&gt; &lt;/td&gt;
+  &lt;td&gt; &lt;/td&gt;
+  &lt;td&gt; &lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;td&gt; Scenario 2&lt;/td&gt;
+  &lt;td&gt; f(&amp;Pi;|x)&lt;/td&gt;
+  &lt;td&gt; &lt;/td&gt;
+  &lt;td&gt; &lt;/td&gt;
+  &lt;td&gt; &lt;/td&gt;
+
+&lt;/tr&gt;
+
+
+
+&lt;/table&gt;
+
+Scenario 1: What if this program accepted five of the five applicants?
+
+Scenario 2: What if this program accepted none of the five applicants? 
+
+
+---
+
+## Intuition vs. Reality
+
+Your intuition may not be Bayesian if
+- you have only relied on the prior model to decide on the posterior model.
+- you have only relied on the data to decide on the posterior model.
+
+Bayesian statistics is a balancing act and we will take both the prior and the data to get to the posterior. Don't worry if your intuition was wrong. As we practice more, you will learn to think like a Bayesian.
+
+---
+
+## Likelihood
+
+We do not know `\(\pi\)` but for now let's consider one of the three possibilities for `\(\pi = 0.1\)`. If `\(\pi\)` were 0.1 what is the probability that we would observe 4 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
+
+Can you calculate an exact value?
+
+---
+
+## Binomial Likelihood
+
+Let random variable `\(X\)` be the _number of successes_ (eg: number of accepted applicants) in `\(n\)` _trials_ (eg: applications).  Assume that the number of trials is _fixed_, the trials are _independent_, and the _probability of success_ (eg: probability of acceptance) in each trial is `\(\pi\)`.  Then the _dependence_ of `\(X\)` on `\(\pi\)` can be modeled by the Binomial model with __parameters__ `\(n\)` and `\(\pi\)`.  In mathematical notation:
+ 
+$$X | \pi \sim \text{Bin}(n,\pi) $$
+
+then, the Binomial model is specified by a conditional pmf:    
+
+`$$f(x|\pi) = {n \choose x} \pi^x (1-\pi)^{n-x} \;\; \text{ for } x \in \{0,1,2,\ldots,n\}$$`
+
+---
+
+## Binomial Likelihood
+
+`\(f(x = 4 | \pi = 0.1) = {5 \choose 4} 0.1^40.9^5 = 0.00045\)`  
+
+or using R
+
+
+```r
+dbinom(x = 4, size = 5, prob = 0.1)
+```
+
+```
+## [1] 0.00045
+```
+
+---
+## Binomial Likelihood
+
+If `\(\pi\)` were 0.1 what is the probability that we would observe 3 of the 5 applicants get admitted to the program? Would you expect this probability to be high or low?
+
+`\(f(x = 3 | \pi = 0.1) = {5 \choose 3} 0.1^30.9^2 = 0.0081\)`  
+
+or using R
+
+
+```r
+dbinom(x = 3, size = 5, prob = 0.1)
+```
+
+```
+## [1] 0.0081
+```
+
+---
+## Binomial Likelihood
+
+Rather than doing this one-by-one we can let R consider all different possible observations of x, 0 through 5. 
+
+
+```r
+dbinom(x = 0:5, size = 5, prob = 0.1)
+```
+
+```
+## [1] 0.59049 0.32805 0.07290 0.00810 0.00045 0.00001
+```
+
+
+---
+
+## Probabilities for `\(x_is\)` if `\(\pi = 0.1\)`
+
+&lt;img src="slide-1-bayes-rv_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Other possibilities for `\(\pi\)`
+
+&lt;img src="slide-1-bayes-rv_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+---
+## We have observed data
+
+The admissions of the committee has announced that they have accepted 3 of the 5 applicants. 
+
+---
+## We have observed data
+
+&lt;img src="slide-1-bayes-rv_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## Likelihood
+
+
+&lt;img src="slide-1-bayes-rv_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+---
+## Likelihood
+
+The likelihood function `\(L(\pi|x=3)\)` is the same as the conditional probability mass function `\(f(x|pi)\)` at the observed value `\(x = 3\)`.
+
+---
+# __pmf vs likelihood__    
+
+When `\(\pi\)` is known, the _conditional pmf_ `\(f(\cdot | \pi)\)` allows us to compare the probabilities of `\(x\)` or `\(x'\)` occurring with `\(\pi\)`: 
+
+`$$f(x|\pi) \; \text{ vs } \; f(x'|\pi) \; .$$`  
+When `\(X=x\)` is known, the _likelihood function_ `\(L(\cdot | x)\)` allows us to compare the relative likelihoods of different scenarios, `\(\pi\)` or `\(\pi'\)`, given that we observed data `\(x\)`:
+
+`$$L(\pi|x) \; \text{ vs } \; L(\pi'|x) \; .$$`
+
+Thus `\(L(\cdot | x)\)` provides the tool we need to evaluate the relative compatibility of data `\(X=x\)` with variable `\(\pi\)`.    
+
+---
+## Getting closer to conclusion
+
+The expert suggested assigned the highest weight to `\(\pi =0.1\)`. 
+
+However the data `\(x = 3\)` suggests that `\(\pi = 0.5\)` is more likely. 
+
+We will continue to consider all the possible values of `\(\pi\)`.
+
+Now is a good time to balance the prior and the likelihood.
+
+---
+
+## From events to random variables
+
+`\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{marginal probability of data}}\)`
+
+--
+
+`\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(x = 3)}\)`
+
+--
+
+`\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(x = 3 \cap \pi = 0.1) + f(x = 3 \cap \pi = 0.5) + f(x = 3 \cap \pi = 0.9)}\)`
+
+--
+
+`\(\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{f(x = 3 | \pi = 0.1) \cdot (\pi = 0.1) + f(x = 3 | \pi = 0.5) \cdot (\pi = 0.5) + f(x = 3 | \pi = 0.9) \cdot (\pi = 0.9)}\)`
+
+
+---
+## Normalizing constant / marginal probability of data
+
+
+```r
+dbinom(x = 3, size = 5, prob = 0.1)
+```
+
+```
+## [1] 0.0081
+```
+
+```r
+dbinom(x = 3, size = 5, prob = 0.5)
+```
+
+```
+## [1] 0.3125
+```
+
+```r
+dbinom(x = 3, size = 5, prob = 0.9)
+```
+
+```
+## [1] 0.0729
+```
+
+---
+
+## Normalizing constant
+
+Thus 
+
+`\(f(x = 3) =\)`
+
+
+```r
+dbinom(x = 3, size = 5, prob = 0.1) * 0.7 +
+dbinom(x = 3, size = 5, prob = 0.5) * 0.2 +
+dbinom(x = 3, size = 5, prob = 0.9) * 0.1
+```
+
+```
+## [1] 0.07546
+```
+
+---
+# Posterior 
+
+&lt;table align = "center"&gt;
+&lt;tr&gt;
+  &lt;th&gt; &amp;Pi; &lt;/th&gt;
+  &lt;th&gt; 0.1&lt;/th&gt;
+  &lt;th&gt; 0.5&lt;/th&gt;
+  &lt;th&gt; 0.9&lt;/th&gt;
+
+&lt;/tr&gt;
+
+&lt;tr&gt;
+  &lt;th&gt; f(&amp;Pi;| x = 3)&lt;/th&gt;
+  &lt;th&gt; 0.0751&lt;/th&gt;
+  &lt;th&gt; 0.8283&lt;/th&gt;
+  &lt;th&gt; 0.0966&lt;/th&gt;
+
+&lt;/tr&gt;
+&lt;/table&gt;
+
+---
+## In summary
+
+Every Bayesian analysis consists of three common steps.   
+
+1.Construct a __prior model__ for your variable of interest, `\(\pi\)`.    
+    A prior model specifies two important pieces of information: the possible values of `\(\pi\)` and the relative prior plausibility of each.  
+
+2.Upon observing data `\(X = x\)`, define the __likelihood function__ `\(L(\pi|x)\)`.    
+    As a first step, we summarize the dependence of `\(X\)` on `\(\pi\)` via a __conditional pmf__ `\(f(x|\pi)\)`.  The likelihood function is then defined by `\(L(\pi|x) = f(x|\pi)\)` and can be used to compare the relative likelihood of different `\(\pi\)` values in light of data `\(X = x\)`.
+
+---
+## In summary
+
+3.Build the __posterior model__ of `\(\pi\)` via Bayes' Rule.    
+    By Bayes' Rule, the posterior model is constructed by balancing the prior and likelihood:
+
+`$$\text{posterior} = \frac{\text{prior} \cdot \text{likelihood}}{\text{normalizing constant}} \propto \text{prior} \cdot \text{likelihood}$$`
+More technically,
+    
+`$$f(\pi|x) = \frac{f(\pi)L(\pi|x)}{f(x)} \propto f(\pi)L(\pi|x)$$`
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

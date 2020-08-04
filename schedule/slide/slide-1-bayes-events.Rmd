@@ -1,0 +1,158 @@
+---
+title: "Bayes' Rule for Events"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+## Example
+
+An algorithm is written to detect cat images. When given a cat image the algorithm identifies the image as a cat image 80% of the time. However, when given an image without a cat, the algorithm falsely identifies it as a cat image 50% of the time. The algorithm is to be tested with a set of images of which are 7% cat images. What is the probability that an image is a cat image if the algorithm identifies it as a cat image?
+---
+# Write out the given information
+
+Let event $A$ represent an event of algorithm identifying an image as a cat image
+
+Let event $B$ represent an event of an image being a cat image.
+---
+
+## Bayes' Rule for Events
+
+$$P(B |A) = \frac{P(A \cap B)}{P(A)} = \frac{P(A|B)P(B)}{P(A)}$$
+--
+
+where, by the Law of Total Probability,     
+
+$$P(A) = P(A|B)P(B) + P(A|B^c)P(B^c)$$
+---
+
+## Spam email
+
+Priya, a data science student, notices that her college's email server is using a faulty spam filter.  Taking matters into her own hands, Priya decides to build her own spam filter.  As a first step, she manually examines all emails she received during the previous month and determines that 40% of these were spam.  
+
+---
+## Prior 
+
+Let event B represent an event of an email being spam.
+
+$P(B) = 0.40$
+
+If Priya was to act on this prior what should she do about incoming emails?
+
+---
+## A possible solution
+
+Since most email is non-spam, sort all emails into the inbox.  
+
+This filter would certainly solve the problem of losing non-spam email in the spam folder, but at the cost of making a mess in Priya's inbox.  
+
+---
+
+## Features of spam emails
+
+Priya observes the following about her latest incoming email. Which of the following is more likely to be a feature of a spam email?
+
+- The email was sent at 1:03 am. 
+
+- The email was sent by an email address which started with the letter _p_.
+
+- The email came from outside the college. 
+
+- The email was written in all capital letters ("all caps") and its subject line.
+
+---
+## Data
+
+Focusing on the last feature, Priya decides to look at some data. In her one-month email collection, 20% of spam but only 5% of non-spam emails used all caps. 
+
+--
+
+Using notation:
+
+$P(A|B) = 0.20$
+
+$P(A|B^c) = 0.05$
+
+---
+
+<div align = "center">
+
+```{r priya, echo = FALSE, fig.align='center', message = FALSE, warning = FALSE}
+library(DiagrammeR)
+library(tidyverse)
+grViz(diagram = "
+    digraph {
+        # graph aesthetics
+        graph [ranksep = 0.5]
+        # node definitions with substituted label text
+        1 [label = 'Prior: \n Only 40% of emails are spam.']
+        2 [label = 'Data: \n All caps is more common among spam.']
+        3 [label = 'Posterior: \n Is the email spam or not?!']
+        # edge definitions with the node IDs
+        1 -> 3
+        2 -> 3
+    }
+")
+```
+
+</div>
+---
+
+Which of the following best describes your posterior understanding of whether the email is spam?
+
+
+a. The chance that this email is spam drops from 40% to 20%.  After all, the subject line might indicate that the email was sent by an excited professor that's offering Priya an automatic "A" in their course!  
+b. The chance that this email is spam jumps from 40% to roughly 70%.  Though using all caps is more common among spam emails, let's not forget that only 40% of Priya's emails are spam.  
+c. The chance that this email is spam jumps from 40% to roughly 95%.  Given that so few non-spam emails use all caps, this email is almost certainly spam.
+
+---
+class: center middle 
+
+# Calculating the posterior
+
+$P(B|A) = \frac{P(A|B) P(B)}{P(A)}$
+
+--
+
+$P(B|A) = \frac{P(A|B) P(B)}{P(A|B) P(B)+P(A|B^c) P(B^c)}$
+
+$P(B|A) = \frac{0.20 \cdot 0.40}{(0.20 \cdot 0.40) + (0.05 \cdot 0.60)}$
+
+
+---
+# From prior to posterior 
+
+__Prior__ to the analysis any email was likely to end up in the inbox, $P(B) = 0.40$
+
+--
+
+After having observed data ( __likelihood__ ) all caps,
+
+Priya's __posterior__ move should be putting this email to spam folder.
+
+$P(B|A) = 0.\overline{72}$
+
+
+---
+# In words 
+
+$$P(B |A) = \frac{P(A \cap B)}{P(A)} = \frac{P(A|B)P(B)}{P(A)}$$
+
+$$P(B |A) = \frac{P(B)P(A|B)}{P(A)}$$
+
+$$\text{posterior} = \frac{\text{prior}\cdot\text{likelihood}}{\text{marginal probability}}$$
+
