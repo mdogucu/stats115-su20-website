@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>The Beta-Binomial Model</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Dogucu" />
+    <link rel="stylesheet" href="slide-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# The Beta-Binomial Model
+### Dr. Dogucu
+
+---
+
+
+layout: true
+  
+&lt;div class="my-header"&gt;&lt;/div&gt;
+
+&lt;div class="my-footer"&gt; From Bayes Rules! book
+ Copyright &amp;copy; Drs. Alicia Johnson, Miles Ott &amp; Mine Dogucu. &lt;a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"&gt;CC BY-NC-SA 4.0&lt;/a&gt;&lt;/div&gt; 
+
+---
+
+## Posterior for the Beta-Binomial Model
+
+Let `\(\pi \sim \text{Beta}(\alpha, \beta)\)` and `\(X|n \sim \text{Bin}(n,\pi)\)`. 
+
+--
+
+`\(f(\pi|x) \propto \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\pi^{\alpha-1} (1-\pi)^{\beta-1} {n \choose x}\pi^x(1-\pi)^{n-x}\)`
+
+--
+
+
+`\(f(\pi|x) \propto \pi^{(\alpha+x)-1} (1-\pi)^{(\beta+n-x)-1}\)`
+
+--
+
+`\(\pi|x \sim \text{Beta}(\alpha +x, \beta+n-x)\)`
+
+--
+
+`\(f(\pi|x) = \frac{\Gamma(\alpha+\beta+n)}{\Gamma(\alpha+x)\Gamma(\beta+n-x)} \pi^{(\alpha+x)-1} (1-\pi)^{(\beta+n-x)-1}\)`
+
+---
+## Conjugate prior
+
+We say that `\(f(\pi)\)` is a conjugate prior for `\(L(\pi|x)\)` if the posterior, `\(f(\pi|x) \propto f(\pi)L(\pi|x)\)`, is from the same model family as the prior.  
+
+Thus, Beta distribution is a conjugate prior for the Binomial likelihood model since the posterior also follows a Beta distribution.
+
+---
+## Bike ownership
+The transportation office at our school wants to know `\(\pi\)` the proportion of people who own bikes on campus so that they can build bike racks accordingly. The staff at the office think that the `\(\pi\)` is more likely to be somewhere 0.05 to 0.25. The plot below shows their prior distribution. Write out a reasonable `\(f(\pi)\)`. Calculate the prior expected value, mode, and variance. 
+
+
+
+
+&lt;img src="slide-2-beta-binomial_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Plotting the prior
+
+
+```r
+plot_beta(5, 35) 
+```
+
+&lt;img src="slide-2-beta-binomial_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Summarizing the prior
+
+
+```r
+summarize_beta(5, 35)
+```
+
+```
+##    mean      mode         var
+## 1 0.125 0.1052632 0.002667683
+```
+
+---
+## Bike ownership posterior
+
+The transportation office decides to collect some data and samples 50 people on campus and asks them whether they own a bike or not. It turns out that 25 of them do! What is the posterior distribution of `\(\pi\)` after having observed this data? 
+
+--
+
+`\(\pi|x \sim \text{Beta}(\alpha +x, \beta+n-x)\)`
+
+--
+
+`\(\pi|x \sim \text{Beta}(5 +25, 35+50-25)\)`
+
+--
+
+`\(\pi|x \sim \text{Beta}(30, 60)\)`
+
+
+---
+
+## Plotting the posterior
+
+
+```r
+plot_beta(30, 60) 
+```
+
+&lt;img src="slide-2-beta-binomial_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Summarizing the posterior
+
+
+```r
+summarize_beta(30,60)
+```
+
+```
+##        mean      mode         var
+## 1 0.3333333 0.3295455 0.002442002
+```
+
+
+
+---
+
+## Plot summary
+
+
+```r
+plot_beta(30, 60, mean = TRUE, mode = TRUE) 
+```
+
+&lt;img src="slide-2-beta-binomial_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Bike ownership: balancing act
+
+
+```r
+plot_beta_binomial(alpha = 5, beta = 35,
+                   x = 25, n = 50)
+```
+
+&lt;img src="slide-2-beta-binomial_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+## Posterior Descriptives
+
+`\(\pi|(X=x) \sim \text{Beta}(\alpha+x, \beta+n-x)\)`
+
+`$$E(\pi | (X=x)) = \frac{\alpha + x}{\alpha + \beta + n}$$` 
+$$\text{Mode}(\pi | (X=x))  = \frac{\alpha + x - 1}{\alpha + \beta + n - 2} $$
+`$$\text{Var}(\pi | (X=x))   = \frac{(\alpha + x)(\beta + n - x)}{(\alpha + \beta + n)^2(\alpha + \beta + n + 1)}\\$$`
+---
+
+## Bike ownership - descriptives of the posterior
+
+What is the descriptive measures (expected value, mode, and variance) of the posterior distribution for the bike ownership example?
+
+--
+
+
+
+```r
+summarize_beta_binomial(5, 35, x = 25, n = 50)
+```
+
+```
+##       model alpha beta      mean      mode         var
+## 1     prior     5   35 0.1250000 0.1052632 0.002667683
+## 2 posterior    30   60 0.3333333 0.3295455 0.002442002
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

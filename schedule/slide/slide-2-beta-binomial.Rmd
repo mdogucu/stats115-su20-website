@@ -1,0 +1,180 @@
+---
+title: "The Beta-Binomial Model"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+## Posterior for the Beta-Binomial Model
+
+Let $\pi \sim \text{Beta}(\alpha, \beta)$ and $X|n \sim \text{Bin}(n,\pi)$. 
+
+--
+
+$f(\pi|x) \propto \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\pi^{\alpha-1} (1-\pi)^{\beta-1} {n \choose x}\pi^x(1-\pi)^{n-x}$
+
+--
+
+
+$f(\pi|x) \propto \pi^{(\alpha+x)-1} (1-\pi)^{(\beta+n-x)-1}$
+
+--
+
+$\pi|x \sim \text{Beta}(\alpha +x, \beta+n-x)$
+
+--
+
+$f(\pi|x) = \frac{\Gamma(\alpha+\beta+n)}{\Gamma(\alpha+x)\Gamma(\beta+n-x)} \pi^{(\alpha+x)-1} (1-\pi)^{(\beta+n-x)-1}$
+
+---
+## Conjugate prior
+
+We say that $f(\pi)$ is a conjugate prior for $L(\pi|x)$ if the posterior, $f(\pi|x) \propto f(\pi)L(\pi|x)$, is from the same model family as the prior.  
+
+Thus, Beta distribution is a conjugate prior for the Binomial likelihood model since the posterior also follows a Beta distribution.
+
+---
+## Bike ownership
+The transportation office at our school wants to know $\pi$ the proportion of people who own bikes on campus so that they can build bike racks accordingly. The staff at the office think that the $\pi$ is more likely to be somewhere 0.05 to 0.25. The plot below shows their prior distribution. Write out a reasonable $f(\pi)$. Calculate the prior expected value, mode, and variance. 
+
+```{r echo = FALSE}
+library(ggplot2)
+library(bayesrules)
+```
+
+
+```{r fig.align='center', fig.height=3.5, echo = FALSE}
+plot_beta(5, 35) +
+    theme(text = element_text(size=20)) 
+```
+
+---
+
+## Plotting the prior
+
+```{r eval = FALSE}
+plot_beta(5, 35) 
+```
+
+```{r fig.align='center', fig.height=4, echo = FALSE}
+plot_beta(5, 35) +
+    theme(text = element_text(size=20)) 
+```
+
+---
+
+## Summarizing the prior
+
+```{r}
+summarize_beta(5, 35)
+```
+
+---
+## Bike ownership posterior
+
+The transportation office decides to collect some data and samples 50 people on campus and asks them whether they own a bike or not. It turns out that 25 of them do! What is the posterior distribution of $\pi$ after having observed this data? 
+
+--
+
+$\pi|x \sim \text{Beta}(\alpha +x, \beta+n-x)$
+
+--
+
+$\pi|x \sim \text{Beta}(5 +25, 35+50-25)$
+
+--
+
+$\pi|x \sim \text{Beta}(30, 60)$
+
+
+---
+
+## Plotting the posterior
+
+```{r eval = FALSE}
+plot_beta(30, 60) 
+```
+
+```{r fig.align='center', fig.height=4, echo = FALSE}
+plot_beta(30, 60) +
+    theme(text = element_text(size=20)) 
+```
+
+
+---
+
+## Summarizing the posterior
+
+```{r}
+summarize_beta(30,60)
+```
+
+
+
+---
+
+## Plot summary
+
+```{r eval = FALSE}
+plot_beta(30, 60, mean = TRUE, mode = TRUE) 
+```
+
+```{r fig.align='center', fig.height=4, echo = FALSE}
+plot_beta(30, 60, mean = TRUE, mode = TRUE) +
+    theme(text = element_text(size=20)) 
+```
+
+---
+
+## Bike ownership: balancing act
+
+```{r eval = FALSE}
+plot_beta_binomial(alpha = 5, beta = 35,
+                   x = 25, n = 50)
+```
+
+```{r fig.align='center', fig.height=5, echo = FALSE}
+plot_beta_binomial(alpha = 5, beta = 35,
+                   x = 25, n = 50) +
+      theme(text = element_text(size=20)) 
+
+```
+
+
+
+---
+
+## Posterior Descriptives
+
+$\pi|(X=x) \sim \text{Beta}(\alpha+x, \beta+n-x)$
+
+$$E(\pi | (X=x)) = \frac{\alpha + x}{\alpha + \beta + n}$$ 
+$$\text{Mode}(\pi | (X=x))  = \frac{\alpha + x - 1}{\alpha + \beta + n - 2} $$
+$$\text{Var}(\pi | (X=x))   = \frac{(\alpha + x)(\beta + n - x)}{(\alpha + \beta + n)^2(\alpha + \beta + n + 1)}\\$$
+---
+
+## Bike ownership - descriptives of the posterior
+
+What is the descriptive measures (expected value, mode, and variance) of the posterior distribution for the bike ownership example?
+
+--
+
+
+```{r}
+summarize_beta_binomial(5, 35, x = 25, n = 50)
+```
+

@@ -1,0 +1,226 @@
+---
+title: "Beta Prior"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+
+## Continuous Prior
+
+We have been pretending that $\pi$ has few possible values but we know that it can take values between 0 and 1. Now it is time to consider all possible values of $\pi$. 
+
+---
+
+## Continuous Probability Models
+
+Let $\pi$ be a continuous random variable with pdf $f(\pi)$.
+Then $f(\pi)$ has the following properties:    
+
+- $\int_\pi f(\pi)d\pi = 1$, ie. the area under $f(\pi)$ is 1
+
+- $f(\pi) \ge 0$
+
+- $P(a < \pi < b) = \int_a^b f(\pi) d\pi$ when $a \le b$
+
+---
+
+## Back to Graduate School Applications
+
+Last lecture we were trying to understand $\pi$ the acceptance rate of a graduate program in a specific department. Let's make a fresh start to the same problem. This time we will let $\pi \in [0,1]$. 
+
+---
+## Plotting the continuous prior
+
+For each of the student's prior ideas for $\pi$ plot the pdf of the prior. Your plot will not be exact since no exact values are given.  
+
+Morteza thinks that it is extremely difficult to get into this program.
+
+Jared thinks that it is difficult to get into this program. 
+
+Erin does not have any strong opinions whether it is difficult or easy to get into this program. 
+
+Xuan thinks that it is easy to get into this program.
+
+Beyoncé thinks that it is extremely easy to get into this program.
+
+---
+
+## Morteza's prior
+
+```{r echo = FALSE, fig.align='center'}
+library(bayesrules)
+library(ggplot2)
+plot_beta(1, 5) +
+    theme(text = element_text(size=20)) 
+
+```
+
+---
+
+## Jared's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(2, 5) +
+    theme(text = element_text(size=20)) 
+
+```
+
+---
+
+## Erin's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(1, 1) +
+    theme(text = element_text(size=20)) 
+
+```
+
+---
+
+## Xuan's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(5, 3) +
+    theme(text = element_text(size=20)) 
+
+```
+
+---
+
+## Beyoncé's prior
+
+```{r echo = FALSE, fig.align='center'}
+plot_beta(5, 1) +
+    theme(text = element_text(size=20)) 
+
+```
+
+---
+
+## Beta Prior model
+
+Let $\pi$ be a random variable which can take any value between 0 and 1, ie. $\pi \in [0,1]$.
+Then the variability in $\pi$ might be well modeled by a Beta model with __shape parameters__ $\alpha > 0$ and $\beta > 0$: 
+
+$$\pi \sim \text{Beta}(\alpha, \beta)$$
+The Beta model is specified by continuous pdf
+\begin{equation}
+f(\pi) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \pi^{\alpha-1} (1-\pi)^{\beta-1} \;\; \text{ for } \pi \in [0,1] 
+\end{equation}
+ where $\Gamma(z) = \int_0^\infty x^{z-1}e^{-x}dx$ and $\Gamma(z + 1) = z \Gamma(z)$.  Fun fact: when $z$ is a positive integer, then $\Gamma(z)$ simplifies to $\Gamma(z) = (z-1)!$.   
+---
+## Plotting Beta Prior
+
+
+---
+## Plotting Beta Prior
+
+```{r echo = FALSE, message = FALSE, fig.align='center'}
+library(tidyverse)
+# Set up beta data
+
+alpha <- c(1,1,3,1,5,20,7,2,5)
+beta  <- c(5,2,7,1,5,20,3,1,1)
+betas <- data.frame(setting = factor(rep(1:9, 
+                                         each = 500)), 
+                    x = rep(seq(0, 1, 
+                                length = 500), 9),
+                    alpha = rep(alpha, each = 500),
+                    beta = rep(beta, each = 500))
+
+betas <- betas %>% 
+  mutate(y = dbeta(x, shape1 = alpha, shape2 = beta))
+
+levels(betas$setting) <-
+  paste0("Beta(",alpha,",",beta,")")
+
+trend_data <- data.frame(alpha, beta,
+                         means = (alpha / (alpha +
+                                             beta)),
+                         modes = 
+                           ((alpha - 1) / 
+                              (alpha + beta - 2))) %>% 
+  mutate(Parameter = 
+           paste0("Beta(",alpha,",",beta,")")) %>% 
+  mutate(setting = Parameter) %>% 
+  mutate(means_d = dbeta(means, alpha, beta), 
+         modes_d = dbeta(modes, alpha, beta))
+
+trend_data$setting <- factor(trend_data$setting, 
+                             levels = c("Beta(1,5)",
+                                        "Beta(1,2)",
+                                        "Beta(3,7)",
+                                        "Beta(1,1)",
+                                        "Beta(5,5)",
+                                        "Beta(20,20)",
+                                        "Beta(7,3)",
+                                        "Beta(2,1)",
+                                        "Beta(5,1)"))
+  
+ggplot(betas, aes(x = x, y = y)) + 
+  lims(x = c(0,1), y = c(0,5.5)) + 
+  geom_line() + 
+  facet_wrap(~ setting) + 
+  labs(x = expression(pi), y =
+         expression(paste("f(",pi,")"))) + 
+  scale_x_continuous(breaks = c(0,0.25,0.5,0.75,1),
+                     labels =
+                       c("0","0.25","0.50","0.75","1")) +
+  theme(text = element_text(size=20)) 
+
+```
+
+---
+
+## Plotting Beta Prior with `bayesrules` package
+
+Use the `plot_beta()` function in the `bayesrules` package to try different shape parameters. Example:
+
+```{r fig.align="center", fig.height=3, eval = FALSE}
+plot_beta(alpha = 5, beta = 7) 
+```
+
+```{r fig.align="center", fig.height=3, echo = FALSE}
+plot_beta(alpha = 5, beta = 7) +
+  theme(text = element_text(size=20)) 
+
+```
+
+
+---
+
+## Beta Descriptives
+
+$$E(\pi) = \frac{\alpha}{\alpha + \beta}$$
+
+$$\text{Mode}(\pi) = \frac{\alpha - 1}{\alpha + \beta - 2}$$  
+
+$$\text{Var}(\pi) = \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$$
+
+
+---
+
+## Beta Descriptives with `bayesrules` package
+
+Use the `summarize_beta()` function in the `bayesrules` package to find the mean, mode, and variance of various Beta distributions. Example:
+
+
+```{r}
+summarize_beta(alpha = 5, beta = 7)
+```
+

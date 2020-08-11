@@ -1,0 +1,26 @@
+---
+title: "Bayes' Rule for Random Variables Review"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+## Exercise
+
+Let proportion of women in the U.S. who develop breast cancer in their lifetime be $\pi$. Even though $\pi$ can take any value between 0 and 1, for the purposes of this question, we will assume possible values of $\pi$ as 0.05, 0.10, 0.30, and 0.50. Since we do not have any medical doctors in our class, we will pretend that we do not have any specific prior ideas about breast cancer and choose a uniform prior. We look at medical records of 8 women who have passed and 1 of them had developed breast cancer at some point in their life. Calculate the posterior distribution for $\pi$.
+
+

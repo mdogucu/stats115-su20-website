@@ -1,0 +1,202 @@
+---
+title: "The Gamma-Poisson Model"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+class: middle
+
+## Choosing a Prior
+
+Prior distribution depends on our current information. When choosing a prior we may consider 
+
+- computational ease
+- interpretability
+
+---
+
+## Conjugate Priors
+
+Let $f(\theta)$ be a prior distribution for parameter $\theta$ from a particular distribution, and $L(\theta|x)$ be the likelihood function.
+If the resulting posterior distribution $f(\theta|x)$ is of the same family of distributions as the prior distribution, then the prior distribution is a conjugate prior for this likelihood.
+
+--
+
+__Examples__
+
+The Beta-Binomial Model - Beta is a conjugate prior for the Binomial Likelihood.
+
+--
+
+The Gamma-Poisson Model
+
+--
+
+The Normal-Normal Model
+
+---
+
+## Non-Conjugate Prior for Binomial Likelihood
+
+$$f(\pi)=e-e^\pi\; \text{ for } \pi \in [0,1] $$
+
+- Is this a valid pdf?
+
+- After observing 10 successes in 50 trials, calculate the posterior.
+
+
+---
+
+## The Question
+
+We are interested in modeling $\lambda$ the rate of fraud risk calls received per day. We plan on collecting data on the number of fraud risk phone calls received each day.
+
+--
+
+$\lambda$ is a rate. $\lambda \geq 0$
+
+---
+
+## Gamma Prior
+
+We guess that we receive on average 3 calls per day and $\lambda$ is somewhere between 2 and 4.
+
+--
+
+Let $\lambda$ be a random variable which can take any value between 0 and $\infty$, ie. $\lambda \in [0,\infty)$.  Then the variability in $\lambda$ might be well modeled by a Gamma model with __shape parameter__ $\alpha > 0$ and __rate parameter__ 
+$\beta > 0$: 
+
+$$\lambda \sim \text{Gamma}(\alpha, \beta)$$
+
+--
+
+The Gamma distribution is specified by continuous pdf
+
+$$f(\lambda) = \frac{\beta^\alpha}{\Gamma(\alpha)} \lambda^{\alpha-1} e^{-\beta\lambda} \;\; \text{ for } \lambda \in [0,\infty)$$
+---
+
+## Gamma Distribution
+
+What is $f(\lambda)$ if $\lambda =1$ and $\lambda \sim \text{Gamma}(2, 5)$ ?
+
+```{r eval = FALSE}
+plot_gamma(shape = 2, rate = 5)
+```
+
+--
+
+.pull-left[
+```{r echo = FALSE, fig.align='center', fig.width=5, fig.height=4}
+library(bayesrules)
+library(ggplot2)
+plot_gamma(2,5) +
+    geom_point(aes(x = 1, y = dgamma(1, 
+                                     shape =2, 
+                                     rate =5)), colour="blue") +
+  geom_text(aes(label= "(1, ?)", x = 1.25, y = 0.25), 
+            color = "blue")
+```
+
+]
+
+
+
+.pull-right[
+```{r}
+dgamma(x = 1, shape = 2, rate = 5)
+```
+
+
+]
+
+
+---
+
+class: middle
+
+## Descriptives of Gamma
+
+$E(\lambda) = \frac{\alpha}{\beta}$
+
+$\text{Mode}(\lambda) = \frac{\alpha - 1}{\beta} \text{ where } \alpha\ge1$ 
+
+$\text{Var}(\lambda) = \frac{\alpha}{\beta^2}$
+
+---
+
+## Gamma Tuning
+
+```{r echo=FALSE, gamma-tuning, fig.width = 8, fig.height = 6, message = FALSE, fig.align='center'}
+library(tidyverse)
+# Set up gamma data
+alpha <- c(2,2,2,   3,3,3,   5,5,5)
+beta  <- c(2,4,6,   2,4,6,  2,4,6)
+gammas <- data.frame(setting = factor(rep(1:9, each = 500)), 
+                    x = rep(seq(0, 3, length = 500), 9),
+                    alpha = rep(alpha, each = 500), beta = rep(beta, each = 500))
+gammas <- gammas %>% 
+    mutate(y = dgamma(x, shape = alpha, rate = beta))
+levels(gammas$setting) <- paste0("Gamma(",alpha,",",beta,")")
+
+  
+g <- ggplot(gammas, aes(x = x, y = y)) + 
+  lims(x = c(0,1), y = c(0,2.5)) + 
+  geom_line() + 
+  facet_wrap(~ setting) + 
+  labs(x = expression(lambda), y = expression(paste("f(",lambda,")"))) +   scale_x_continuous(breaks = c(0,1,2,3), labels = c("0","1","2","3"))
+
+g
+``` 
+
+---
+
+## Tuning Gamma example
+
+For our example on spam phone calls, set a prior for $\lambda$ such that $E(\lambda) = 3$ and $\lambda$ most likely is between 2 and 4. You can use `plot_gamma()` function to try out different gamma distributions.
+
+--
+
+```{r fig.width = 4, fig.height = 3, message = FALSE, fig.align='center'}
+plot_gamma(12,4)
+```
+
+---
+
+## Poisson Likelihood
+
+We collect four days of data and receive 6, 2, 2, 1 spam calls each day. Write out the likelihood model.
+
+--
+
+$$L(\lambda | (x_1, \ldots, x_n))=\frac{e^{-n\lambda}\lambda^{\sum x_i}}{\prod x_i!}$$
+
+---
+
+## Gamma- Poisson Conjugacy
+
+Based on the observed data how does our idea about $\lambda$ change? Find the posterior.
+
+--
+
+If $f(\lambda) \sim  \text{Gamma}(\alpha, \beta)$   
+
+and if $x_i \sim iid \text{ Poissson}(\lambda) \text{for } i \in 1,\ldots ,n$ 
+
+then $f(\lambda|\vec{x}) \sim \text{Gamma}(\alpha+ \sum x_i, \beta+n)$.
+
+
