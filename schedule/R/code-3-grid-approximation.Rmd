@@ -1,0 +1,62 @@
+---
+output: html_document
+---
+
+## Grid Approximation
+
+When it is impossible (or difficult) to specify the posterior we can approximate the posterior. 
+
+Let $\pi \sim \text{Beta}(2,2)$, $x = 9$ and $n = 10$.
+
+In this case we would end up with 
+
+$\pi \sim \text{Beta}(11,3)$
+
+We will try to achieve the same posterior but this time with grid approximation with 6 (and then 101) different pi values.  
+
+```{r message = FALSE}
+library(tidyverse)
+```
+
+
+# Step 1: Define a grid of pi values
+
+
+
+
+# Step 2: Evaluate the prior & likelihood at each pi
+
+
+
+# Step 3: Approximate the posterior
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Step 4: Sample from the discretized posterior
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

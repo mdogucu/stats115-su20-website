@@ -1,0 +1,154 @@
+---
+output: html_document
+author: "Alicia Johnson, Miles Ott, Mine Dogucu"
+---
+
+MCMC (Markov Chain Monte Carlo) simulation produces a _chain_ of $N$ __dependent__ $\theta$ values, $\left\lbrace \theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(N)} \right\rbrace$, which are __not__ drawn from the posterior pdf $f(\theta|x)$.
+
+__Metropolis-Hastings algorithm__
+
+Step 1: Propose a random location for the parameter.
+Step 2: Decide whether to go to the proposed location or to stay at the current location
+
+
+## Approximating Posterior
+
+$\lambda \sim  \text{Gamma}(1,1)$  
+$X = 0$
+
+We know posterior will be Gamma(1,2)
+
+```{r message=FALSE}
+library(tidyverse)
+```
+
+```{r}
+current <- 1
+set.seed(4)
+```
+
+MH algorithm makes a proposal
+
+```{r}
+proposal <- rnorm(1, mean = current, sd = 0.3)
+proposal
+```
+
+
+```{r}
+bayesrules::plot_normal(current, 0.3)
+```
+
+
+```{r}
+proposal_plaus <- dgamma(proposal, 1, 1) * dpois(0, proposal)
+
+current_plaus <- dgamma(current, 1, 1) * dpois(0, current)
+
+alpha <- min(1, proposal_plaus/current_plaus)
+alpha
+```
+
+Should I stay or should I go?
+
+```{r}
+next_stop <- sample(c(proposal, current), 
+                    size = 1, 
+                    prob = c(alpha, 1-alpha))
+next_stop
+```
+
+
+
+```{r}
+one_mh_iteration <- function(sigma, current){
+  
+  proposal <- rnorm(1, mean = current, sd = sigma)
+  
+  if (proposal < 0) {
+    alpha <- 0
+    
+  } else {
+    
+    proposal_plaus <- dgamma(proposal, 1, 1) * dpois(0, proposal)
+    
+    current_plaus <- dgamma(current, 1, 1) * dpois(0, current)
+    
+    alpha <- min(1, proposal_plaus/current_plaus)
+  }   
+  
+  next_stop <- sample(c(proposal, current), 
+                      size = 1,
+                      prob = c(alpha, 1-alpha))
+
+
+  return(data.frame(proposal, alpha, next_stop))
+  
+} #end of one_mh_iteration function
+```
+
+Using the `one_mh_iteration` function
+
+```{r}
+set.seed(4)
+
+one_mh_iteration(sigma = 0.3, current = 1)
+```
+  
+The code above implements one iteration of the Metropolis-Hastings algorithm but we would like to have multiple iterations.
+
+
+```{r}
+mh_tour <- function(N, sigma){
+  
+  # Start the chain at location 1
+  current <- 1
+  
+  # Initialize the simulation
+  
+  lambda <- rep(0, N)
+  
+  # Simulate N Markov chain stops
+  
+  for(i in 1:N){
+    
+    #Simulate one iteration
+    sim <- one_mh_iteration(sigma = sigma, 
+                            current = current)
+    
+    #Record next location
+    lambda[i] <- sim$next_stop
+
+    #Reset the current location
+    current <- sim$next_stop
+ 
+
+  }
+  #Return the chain locations
+  return(data.frame(iteration = c(1:N), lambda))
+}
+```
+
+Using the Metropolis Hastings Algorithm to approximate the posterior. Recall:
+
+$\lambda \sim  \text{Gamma}(1,1)$  
+$X = 0$  
+
+We know posterior will be Gamma(1,2)
+
+```{r}
+set.seed(4)
+mh_simulation_1 <- mh_tour(N = 5000, sigma =0.3)
+
+mh_simulation_1 %>% 
+  ggplot(aes(x = iteration, y = lambda)) +
+  geom_line()
+
+mh_simulation_1 %>% 
+  ggplot(aes(x = lambda)) +
+  geom_histogram(aes(y = ..density..)) +
+  stat_function(fun = dgamma, args = list(1,2))
+
+```
+
+

@@ -1,0 +1,40 @@
+---
+title: "Data Order Invariance"
+author: "Dr. Dogucu"
+output: 
+  xaringan::moon_reader:
+    css: slide-style.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+---
+
+layout: true
+  
+<div class="my-header"></div>
+
+<div class="my-footer"> From Bayes Rules! book
+ Copyright &copy; Drs. Alicia Johnson, Miles Ott & Mine Dogucu. <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div> 
+
+---
+
+$$f(\theta | x_1,x_2) = f(\theta|x_2,x_1)$$
+
+--
+
+$$f(\theta|x_1) = \frac{\text{prior}\cdot \text{likelihood}}{\text{normalizing constant}} = \frac{f(\theta)L(\theta|x_1)}{f(x_1)}$$
+
+--
+
+$$f(\theta|x_2) = \frac{\text{prior}\cdot \text{likelihood}}{\text{normalizing constant}} = \frac{\frac{f(\theta)L(\theta|x_1)}{f(x_1)}L(\theta|x_2)}{f(x_2)}$$
+--
+
+$$f(\theta|x_1,x_2) =  \frac{f(\theta)L(\theta|x_1)L(\theta|x_2)}{f(x_1)f(x_2)}$$
+--
+
+$$f(\theta|x_2,x_1) =  \frac{f(\theta)L(\theta|x_2)L(\theta|x_1)}{f(x_2)f(x_1)}$$
+
+--
+
+$$f(\theta | x_1,x_2) = f(\theta|x_2,x_1)$$
