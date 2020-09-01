@@ -1,0 +1,95 @@
+---
+title: "Simple Linear Regression A to Z"
+author: "Alicia Johnson, Miles Ott, Mine Dogucu"
+output: html_document
+---
+
+Loading packages
+
+```{r}
+library(tidyverse)
+library(rstanarm)
+library(bayesplot)
+
+set.seed(84735)
+```
+
+
+Data wrangling
+
+```{r}
+bikes <- read_csv("bike_share.csv")
+
+# Clean up & subset
+set.seed(84735)
+bikes <- bikes %>% 
+  mutate(rides = riders_registered) %>% 
+  select(-riders_casual, -riders_total, -riders_registered) %>% 
+  filter(temp_feel < 87, temp_feel > 45) %>% 
+  #sample_n(200) %>% 
+  sample_n(500) %>% 
+  arrange(date)
+
+bikes_train <- bikes %>% 
+  sample_frac(0.80)
+
+
+
+bikes_test <- bikes %>% 
+  anti_join(bikes_train, by = "date")
+
+```
+
+
+
+```{r}
+normal_model_sim <- stan_glm(rides ~ temp_feel, 
+                             data = bikes_train, 
+                             family = gaussian,
+                             chains = 4, iter = 5000*2)
+
+
+
+posterior_interval(normal_model_sim, prob = 0.80)
+
+
+normal_model_df <- as.array(normal_model_sim) %>% 
+  reshape2::melt() %>% 
+  pivot_wider(names_from = parameters, values_from = value)
+
+```
+
+```{r}
+predictions <- posterior_predict(normal_model_sim,
+                               newdata = bikes_test)
+
+ppc_intervals(bikes_test$rides,
+              yrep = predictions,
+              x = bikes_test$temp_feel,
+              prob = 0.5,
+              prob_outer = 0.95)
+
+bayesrules::prediction_summary(y = bikes_test$rides, 
+                   yrep = predictions)
+
+```
+
+
+
+__Posterior predictive summaries__
+
+Let $Y_1, Y_2, \ldots, Y_n$ denote $n$ _observed_ outcomes.  Then each $Y_i$ has a corresponding posterior predictive model with _median_ $Y_i'$ and _median absolute deviation_ $\text{mad}_i$.  We can evaluate the overall quality of the posterior predictive models by the following measures:
+
+- `mae`    
+The __median absolute error__ measures the typical difference between the observed $Y_i$ and their posterior predictive medians $Y_i'$, 
+
+$$\text{mae} = \text{median}_{i \in \{1,2,\ldots,n\}} |Y_i - Y_i'|$$
+
+`mae_scaled`    
+The __scaled median absolute error__ measures the typical number of absolute deviations between the observed $Y_i$ and their posterior predictive medians $Y_i'$:
+
+$$\text{mae scaled} = \text{median}_{i \in \{1,2,\ldots,n\}} \frac{|Y_i - Y_i'|}{\text{mad}_i}$$
+
+- `within_50` and `within_95`    
+
+The `within_50` statistic measures the proportion of observed values $Y_i$ that fall within their 50% posterior prediction interval.  Similarly, `within_95` measures the proportion of observed values $Y_i$ that fall within their 95% posterior prediction interval.

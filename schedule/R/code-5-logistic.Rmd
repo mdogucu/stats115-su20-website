@@ -1,0 +1,71 @@
+---
+title: "Logistic Regression"
+author: "Alicia Johnson, Miles Ott, Mine Dogucu"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load the data
+library(rattle)
+library(tidyverse)
+library(rstanarm)
+library(bayesplot)
+data(weatherAUS)
+
+# Take a sub-sample of the data
+set.seed(84735)
+weather <- weatherAUS %>% 
+  filter(Location == "Perth") %>% 
+  na.omit() %>% 
+  sample_n(1000) 
+
+names(weather) <- tolower(names(weather))
+
+weather <- weather %>% 
+  select(date, raintomorrow, humidity9am, humidity3pm, raintoday)
+
+weather_train <- weather %>% 
+  sample_frac(0.80)
+
+
+
+weather_test <- weather %>% 
+  anti_join(weather_train, by = "date")
+```
+
+
+$$\text{odds} = \frac{\pi}{1-\pi}$$
+
+$$Y_i | \pi_i \sim \text{Bern}(\pi_i)$$
+
+$$E(Y_i|\pi_i) = \pi_i$$
+$$g(\pi_i) = \beta_0 + \beta_1 X_{i1}$$
+```{r}
+rain_model_1 <- stan_glm(
+  raintomorrow ~ humidity9am + humidity3pm, data = weather_train,
+  family = binomial,
+  chains = 4, iter = 5000*2)
+```
+
+
+```{r}
+rain_pred_1 <- posterior_predict(
+  rain_model_1, 
+  newdata = weather_test)
+```
+
+```{r}
+weather_classifications <- weather_test %>% 
+  mutate(rain_prop = colMeans(rain_pred_1)) %>% 
+  mutate(rain_class_1 = as.numeric(rain_prop >= 0.5)) %>% 
+  select(humidity9am, humidity3pm, rain_prop, rain_class_1, raintomorrow)
+```
+
+```{r}
+table(weather_classifications$raintomorrow, weather_classifications$rain_class_1)
+```
+
